@@ -19,17 +19,24 @@ public class ThemesController {
         this.themeService = themeService;
     }
 
-    @GetMapping("/themes")
+    @GetMapping("/theme")
     public List<Theme> getThemes() {
         return themeService.getThemes();
     }
 
-    @GetMapping("/themes/{themeId}")
+    @GetMapping("/theme/{themeId}")
     public Theme getThemeDetail(
             @PathVariable String themeId
     ) {
         return themeService.getThemeDetail(themeId);
     }
+
+    @GetMapping("/company")
+    public List<Company> getCompanies() {
+        return themeService.getCompanies();
+    }
+
+
     @GetMapping("/company/{companyId}")
     public Company getCompany(
             @PathVariable("companyId") String companyId
@@ -43,6 +50,4 @@ public class ThemesController {
     ) {
         return themeService.getThemesByCompany(companyId);
     }
-
-
 }

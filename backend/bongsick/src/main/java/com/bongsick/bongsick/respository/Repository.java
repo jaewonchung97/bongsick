@@ -8,6 +8,8 @@ import java.util.List;
 public interface Repository {
     List<Theme> getThemes();
 
+    List<Company> getCompanies();
+
     Company getCompany(String companyId);
 
     Theme getThemeDetail(String themeId);

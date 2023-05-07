@@ -4,14 +4,21 @@ package com.bongsick.bongsick.respository;
 import com.bongsick.bongsick.domain.Company;
 import com.bongsick.bongsick.domain.Theme;
 import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -19,13 +26,39 @@ import java.util.concurrent.ExecutionException;
 @Repository
 @Slf4j
 public class FirebaseRepository implements com.bongsick.bongsick.respository.Repository {
+
     private static final String THEMES_COLLECTION = "themes";
     private static final String COMPANIES_COLLECTION = "companies";
-
     private final Firestore db;
 
     public FirebaseRepository() {
+        FileInputStream serviceAccount = null;
+        try {
+            serviceAccount = new FileInputStream("src/main/resources/themes-77046-firebase-adminsdk-s9933-54a59f3f00.json");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        FirebaseOptions options = null;
+        try {
+            options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .build();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        FirebaseApp.initializeApp(options);
         this.db = FirestoreClient.getFirestore();
+    }
+
+    @PostConstruct
+    void init() {
+        try {
+            log.info("Load Configuration File");
+
+        } catch (Exception e) {
+            log.warn("Exception : {}", e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -43,6 +76,23 @@ public class FirebaseRepository implements com.bongsick.bongsick.respository.Rep
             throw new RuntimeException(e);
         }
         return themes;
+    }
+
+    @Override
+    public List<Company> getCompanies() {
+        List<Company> companies = new ArrayList<>();
+        ApiFuture<QuerySnapshot> future = db.collection(COMPANIES_COLLECTION).get();
+        try {
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for (QueryDocumentSnapshot document : documents) {
+                Company company = document.toObject(Company.class);
+                company.setId(document.getId());
+                companies.add(company);
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        return companies;
     }
 
     @Override

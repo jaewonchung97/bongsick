@@ -22,6 +22,10 @@ public class ThemeService {
         return repository.getThemes();
     }
 
+    public List<Company> getCompanies(){
+        return repository.getCompanies();
+    }
+
     public Company getCompany(String companyId) {
         return repository.getCompany(companyId);
     }
