@@ -10,6 +10,8 @@ import UIKit
 final class RecordView: UIView {
     
     // MARK: - Properties
+    
+    let testView = UIView()
 
     private let mainView: UIView = {
         let view = UIView()
