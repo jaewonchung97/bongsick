@@ -139,7 +139,6 @@ public class FirebaseRepository implements com.bongsick.bongsick.respository.Rep
             theme.setId(document.getId());
             themes.add(theme);
         }
-
         return themes;
     }
 }

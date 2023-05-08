@@ -13,4 +13,5 @@ public class Theme {
     int personnel_min;
     int playTime;
     String story;
+    String genre;
 }
