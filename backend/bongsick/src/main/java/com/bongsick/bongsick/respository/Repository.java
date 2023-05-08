@@ -14,9 +14,5 @@ public interface Repository {
 
     Theme getThemeDetail(String themeId);
 
-    /*
-    Get Themes by company, personnel,
-     */
-
     List<Theme> getThemesByCompany(String companyId);
 }

@@ -38,5 +38,4 @@ public class ThemeService {
         return repository.getThemesByCompany(companyId);
     }
 
-
 }
