@@ -90,6 +90,7 @@ extension RecordViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = RecordDetailViewController()
         detailVC.hidesBottomBarWhenPushed = true
+        detailVC.navigationItem.largeTitleDisplayMode = .never
         detailVC.recordData = recordDataManager.getRecordThemesFromCoreData()[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }

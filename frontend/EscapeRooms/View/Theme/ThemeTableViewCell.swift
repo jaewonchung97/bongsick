@@ -18,8 +18,7 @@ final class ThemeTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    var themeData: [Theme] = []
-    var theme: Theme?
+    var themeArray: [Theme] = []
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,7 +28,7 @@ final class ThemeTableViewCell: UITableViewCell {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(ThemeCollectionViewCell.self, forCellWithReuseIdentifier: ThemeCollectionViewCell.identifier)
-        cv.backgroundColor = .black
+        cv.backgroundColor = .customBlack
         cv.showsVerticalScrollIndicator = false
         cv.showsHorizontalScrollIndicator = false
         return cv
@@ -72,20 +71,17 @@ final class ThemeTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(collectionViewConstraints)
     }
     
-    func configureCell(themeData: [Theme]) {
-        self.themeData = themeData
-    }
 }
 
 extension ThemeTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return themeData.count
+        return themeArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThemeCollectionViewCell.identifier, for: indexPath) as? ThemeCollectionViewCell else { return UICollectionViewCell() }
-        cell.imageView.image = themeData[indexPath.row].image
+        cell.imageURL = themeArray[indexPath.row].imgURL
         return cell
     }
     

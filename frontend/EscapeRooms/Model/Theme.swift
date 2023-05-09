@@ -7,7 +7,7 @@
 
 import UIKit
  
-struct Theme {
+struct TestTheme {
     let image: UIImage?
     let name: String
     let company: String

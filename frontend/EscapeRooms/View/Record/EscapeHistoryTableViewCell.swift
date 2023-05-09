@@ -138,7 +138,7 @@ class EscapeHistoryTableViewCell: UITableViewCell {
         let second = recordData?.second ?? "0"
         let escapeTime = "\(minute)분 \(second)초"
         if escapeTime == "분 초" {
-            escapeTimeLabel.text = "실패"
+            escapeTimeLabel.text = "실패     "
             escapeTimeLabel.textColor = .red
         } else {
             escapeTimeLabel.text = escapeTime

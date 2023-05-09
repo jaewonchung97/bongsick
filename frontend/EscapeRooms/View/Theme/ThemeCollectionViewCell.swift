@@ -10,10 +10,11 @@ import UIKit
 class ThemeCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ThemeCollectionViewCell"
-    
-    var themeData: Theme? {
+
+    var imageURL: String? {
         didSet {
-            configureCell()
+            guard let url = imageURL else { return }
+            NetworkingManager.shared.loadImage(url, imageView: imageView)
         }
     }
     
@@ -24,6 +25,7 @@ class ThemeCollectionViewCell: UICollectionViewCell {
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.layer.cornerRadius = 8
         iv.layer.masksToBounds = true
+        iv.contentMode = .scaleToFill
         return iv
     }()
 
@@ -31,7 +33,6 @@ class ThemeCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .black
         configureUI()
         setConstraints()
     }
@@ -44,14 +45,18 @@ class ThemeCollectionViewCell: UICollectionViewCell {
         setConstraints()
         super.updateConstraints()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = nil
+    }
+    
     // MARK: - Setting
     
     func configureUI() {
+        self.layer.cornerRadius = 8
+        self.layer.masksToBounds = true
         contentView.addSubview(imageView)
-    }
-    
-    func configureCell() {
-        imageView.image = themeData?.image
     }
     
     func setConstraints() {

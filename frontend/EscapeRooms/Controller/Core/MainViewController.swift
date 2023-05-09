@@ -14,6 +14,10 @@ class MainViewController: UIViewController {
     
     let mainView = MainView()
     
+    let cell = ThemeTableViewCell()
+    
+    var themeArray: [Theme] = []
+    
     // MARK: - Life Cycle
 
     override func loadView() {
@@ -27,12 +31,26 @@ class MainViewController: UIViewController {
         mainView.titleCollectionView.dataSource = self
         mainView.titleCollectionView.delegate = self
         navigationController?.navigationBar.tintColor = .white
-//        let image = UIImage(named: "exit.png")
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: nil)
-//        navigationItem.leftBarButtonItem?.tintColor = .customOrange
+        getThemeData()
     }
-    
+
     // MARK: - Setting
+    
+    func getThemeData() {
+        NetworkingManager.shared.fetchTheme { result in
+            switch result {
+            case Result.success(let themeData):
+                self.themeArray = themeData
+                DispatchQueue.main.async {
+                    self.cell.collectionView.reloadData()
+                }
+                print("MainVC에서 데이터를 전달 받음.")
+            case Result.failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        print(themeArray.count)
+    }
 
 }
 
@@ -52,7 +70,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ThemeTableViewCell.identifier, for: indexPath) as? ThemeTableViewCell else { return UITableViewCell() }
-        cell.themeData = ThemeDataManager.shared.getThemeData()
+        dump(self.themeArray)
+        cell.themeArray = themeArray
         cell.delegate = self
         return cell
     }
@@ -76,18 +95,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// MARK: - UICollectionView
+// MARK: - BestThemeViewCell (UICollectionViewCell)
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let titleData = ThemeDataManager.shared.getThemeData()
-        return titleData.count
+        return themeArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BestThemeViewCell.identifier, for: indexPath) as? BestThemeViewCell else { return UICollectionViewCell() }
-        let data = ThemeDataManager.shared.getThemeData()
-        cell.imageView.image = data[indexPath.row].image
+        cell.imgURL = themeArray[indexPath.row].imgURL
         return cell
     }
 }
@@ -103,8 +120,7 @@ extension MainViewController: ThemeTableViewCellDelegate {
         let vc = ThemeDetailViewContoller()
         vc.hidesBottomBarWhenPushed = true
         vc.navigationItem.largeTitleDisplayMode = .never
-        let themeData = ThemeDataManager.shared.getThemeData()
-        vc.themeData = themeData[indexPath.row]
+        vc.theme = themeArray[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
         print(#function)
     }

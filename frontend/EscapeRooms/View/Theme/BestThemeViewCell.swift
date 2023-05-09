@@ -12,6 +12,12 @@ class BestThemeViewCell: UICollectionViewCell {
     static let identifier = "BestThemeViewCell"
     
     // MARK: - Properties
+    
+    var imgURL: String? {
+        didSet {
+            loadImage()
+        }
+    }
 
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -42,7 +48,7 @@ class BestThemeViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .black
+        contentView.backgroundColor = .customBlack
         configureUI()
         setConstraints()
     }
@@ -67,6 +73,20 @@ class BestThemeViewCell: UICollectionViewCell {
         ]
         
         NSLayoutConstraint.activate(stackViewConstraints)
+    }
+    
+    func loadImage() {
+        guard let urlString = self.imgURL else { return }
+        guard let url = URL(string: urlString) else { return }
+        
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            guard urlString == url.absoluteString else { return }
+            
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: data)
+            }
+        }
     }
 
 }

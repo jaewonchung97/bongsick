@@ -9,7 +9,8 @@ import UIKit
 
 final class TabBarViewController: UITabBarController {
     
-    let vc1 = MainViewController()
+//    let vc1 = MainViewController()
+    let vc1 = SearchViewController()
     let vc2 = LikesViewController()
     let vc3 = RecordViewController()
     let vc4 = MyInformationViewController()
@@ -37,9 +38,9 @@ final class TabBarViewController: UITabBarController {
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.customBlack
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = UIColor.white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.customBlack]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.customBlack]
         
         nav1.navigationBar.standardAppearance = appearance
         nav1.navigationBar.compactAppearance = appearance
@@ -59,7 +60,7 @@ final class TabBarViewController: UITabBarController {
         
         nav1.navigationBar.prefersLargeTitles = true
         nav2.navigationBar.prefersLargeTitles = true
-        nav3.navigationBar.prefersLargeTitles = false
+        nav3.navigationBar.prefersLargeTitles = true
         nav4.navigationBar.prefersLargeTitles = true
         
         nav1.title = "테마"
@@ -69,10 +70,12 @@ final class TabBarViewController: UITabBarController {
         
         setViewControllers([nav1, nav2, nav3, nav4], animated: false)
         modalPresentationStyle = .fullScreen
-        tabBar.backgroundColor = .black
-        tabBar.barTintColor = .black
+        tabBar.backgroundColor = .white
+        tabBar.barTintColor = .white
         tabBar.alpha = 0.95
         tabBar.tintColor = .customOrange
+        tabBar.layer.borderWidth = 0.2
+        tabBar.layer.borderColor = UIColor.black.cgColor
         
         guard let items = self.tabBar.items else { return }
         items[0].image = UIImage(systemName: "square.grid.2x2")

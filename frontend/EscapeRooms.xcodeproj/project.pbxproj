@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0529A1B12A080BA800236A09 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B02A080BA800236A09 /* NetworkingManager.swift */; };
+		0529A1B32A08BCA800236A09 /* ThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B22A08BCA800236A09 /* ThemeData.swift */; };
+		0529A1B52A08C79300236A09 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B42A08C79300236A09 /* Constant.swift */; };
+		0529A1B92A08E0D100236A09 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B82A08E0D100236A09 /* TypeAlias.swift */; };
+		0529A1BB2A0922FB00236A09 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1BA2A0922FB00236A09 /* SearchViewController.swift */; };
+		0529A1BD2A09237500236A09 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1BC2A09237500236A09 /* SearchView.swift */; };
+		0529A1BF2A09241E00236A09 /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1BE2A09241E00236A09 /* SearchViewTableViewCell.swift */; };
+		0529A1C22A0A0E1D00236A09 /* ResultsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1C12A0A0E1D00236A09 /* ResultsTableController.swift */; };
 		052BB23329D571700009E829 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB23229D571700009E829 /* RecordViewController.swift */; };
 		052BB23529D5726B0009E829 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB23429D5726B0009E829 /* RecordView.swift */; };
 		052BB23929DF05AF0009E829 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB23829DF05AF0009E829 /* RecordDetailView.swift */; };
@@ -14,7 +22,7 @@
 		052BB23F29E669E40009E829 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB23E29E669E40009E829 /* CoreDataManager.swift */; };
 		052BB24429E70B760009E829 /* RecordData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB24229E70B760009E829 /* RecordData+CoreDataClass.swift */; };
 		052BB24529E70B760009E829 /* RecordData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB24329E70B760009E829 /* RecordData+CoreDataProperties.swift */; };
-		052BB24829E7D1B00009E829 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB24729E7D1B00009E829 /* UIColor.swift */; };
+		052BB24829E7D1B00009E829 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB24729E7D1B00009E829 /* Extension.swift */; };
 		052BB24C29F3B1160009E829 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB24B29F3B1160009E829 /* TabBarViewController.swift */; };
 		0544D53D29ACC2F700394E5E /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544D53C29ACC2F700394E5E /* LikesViewController.swift */; };
 		0544D53F29AF594500394E5E /* LikesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544D53E29AF594500394E5E /* LikesCell.swift */; };
@@ -47,7 +55,6 @@
 		05AEC7BC29A631E4007944A0 /* EscapeRooms.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7BA29A631E4007944A0 /* EscapeRooms.xcdatamodeld */; };
 		05AEC7BE29A631E5007944A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05AEC7BD29A631E5007944A0 /* Assets.xcassets */; };
 		05AEC7C129A631E5007944A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05AEC7BF29A631E5007944A0 /* LaunchScreen.storyboard */; };
-		05AEC7CF29A707EC007944A0 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7CE29A707EC007944A0 /* ThemeViewController.swift */; };
 		05AEC7D129A70A3E007944A0 /* ThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7D029A70A3E007944A0 /* ThemeTableViewCell.swift */; };
 		05AEC7D829A7780B007944A0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7D729A7780B007944A0 /* Theme.swift */; };
 		05AEC7DA29A7784B007944A0 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7D929A7784B007944A0 /* ThemeDataManager.swift */; };
@@ -56,6 +63,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0529A1B02A080BA800236A09 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		0529A1B22A08BCA800236A09 /* ThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeData.swift; sourceTree = "<group>"; };
+		0529A1B42A08C79300236A09 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		0529A1B82A08E0D100236A09 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
+		0529A1BA2A0922FB00236A09 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		0529A1BC2A09237500236A09 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		0529A1BE2A09241E00236A09 /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
+		0529A1C12A0A0E1D00236A09 /* ResultsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableController.swift; sourceTree = "<group>"; };
 		052BB23229D571700009E829 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		052BB23429D5726B0009E829 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		052BB23829DF05AF0009E829 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
@@ -63,7 +78,7 @@
 		052BB23E29E669E40009E829 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		052BB24229E70B760009E829 /* RecordData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordData+CoreDataClass.swift"; sourceTree = "<group>"; };
 		052BB24329E70B760009E829 /* RecordData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordData+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		052BB24729E7D1B00009E829 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		052BB24729E7D1B00009E829 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		052BB24B29F3B1160009E829 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0544D53C29ACC2F700394E5E /* LikesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		0544D53E29AF594500394E5E /* LikesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesCell.swift; sourceTree = "<group>"; };
@@ -87,7 +102,6 @@
 		05AEC7BD29A631E5007944A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05AEC7C029A631E5007944A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05AEC7C229A631E5007944A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		05AEC7CE29A707EC007944A0 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		05AEC7D029A70A3E007944A0 /* ThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTableViewCell.swift; sourceTree = "<group>"; };
 		05AEC7D729A7780B007944A0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		05AEC7D929A7784B007944A0 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
@@ -117,10 +131,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0529A1B72A08E0B300236A09 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0529A1B42A08C79300236A09 /* Constant.swift */,
+				0529A1B82A08E0D100236A09 /* TypeAlias.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		0529A1C02A0A0CB400236A09 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0529A1BA2A0922FB00236A09 /* SearchViewController.swift */,
+				0529A1C12A0A0E1D00236A09 /* ResultsTableController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		052BB24629E7D19F0009E829 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				052BB24729E7D1B00009E829 /* UIColor.swift */,
+				052BB24729E7D1B00009E829 /* Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -140,7 +172,7 @@
 		052BB24A29F3B0A50009E829 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				05AEC7CE29A707EC007944A0 /* ThemeViewController.swift */,
+				0529A1C02A0A0CB400236A09 /* Main */,
 				0544D53C29ACC2F700394E5E /* LikesViewController.swift */,
 				0544D58129BA055500394E5E /* MyInformationViewController.swift */,
 				052BB23229D571700009E829 /* RecordViewController.swift */,
@@ -191,6 +223,7 @@
 		05AEC7A529A631E4007944A0 = {
 			isa = PBXGroup;
 			children = (
+				0529A1B72A08E0B300236A09 /* Helper */,
 				05AEC7B029A631E4007944A0 /* EscapeRooms */,
 				05AEC7AF29A631E4007944A0 /* Products */,
 			);
@@ -234,6 +267,8 @@
 				0579A87A2A0777F800810DBF /* Likes */,
 				0579A8792A0777CD00810DBF /* Record */,
 				0579A87B2A0777FF00810DBF /* Other */,
+				0529A1BC2A09237500236A09 /* SearchView.swift */,
+				0529A1BE2A09241E00236A09 /* SearchViewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -260,6 +295,8 @@
 				052BB24229E70B760009E829 /* RecordData+CoreDataClass.swift */,
 				052BB24329E70B760009E829 /* RecordData+CoreDataProperties.swift */,
 				0579A86A29F8EEDD00810DBF /* User.swift */,
+				0529A1B02A080BA800236A09 /* NetworkingManager.swift */,
+				0529A1B22A08BCA800236A09 /* ThemeData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,12 +390,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				052BB24429E70B760009E829 /* RecordData+CoreDataClass.swift in Sources */,
+				0529A1B52A08C79300236A09 /* Constant.swift in Sources */,
 				0544D57C29B998B700394E5E /* LoginViewController.swift in Sources */,
-				05AEC7CF29A707EC007944A0 /* ThemeViewController.swift in Sources */,
+				0529A1B32A08BCA800236A09 /* ThemeData.swift in Sources */,
 				0544D53F29AF594500394E5E /* LikesCell.swift in Sources */,
 				052BB23529D5726B0009E829 /* RecordView.swift in Sources */,
 				0579A86B29F8EEDD00810DBF /* User.swift in Sources */,
 				05AEC7DE29A7B4DA007944A0 /* ThemeDetailView.swift in Sources */,
+				0529A1B92A08E0D100236A09 /* TypeAlias.swift in Sources */,
 				0579A86D29F91D1700810DBF /* MainViewController.swift in Sources */,
 				0579A87129F91EA900810DBF /* ThemeCollectionViewCell.swift in Sources */,
 				052BB23329D571700009E829 /* RecordViewController.swift in Sources */,
@@ -372,12 +411,17 @@
 				052BB23D29DF0B440009E829 /* RecordDetailViewController.swift in Sources */,
 				0579A8772A07532E00810DBF /* CircularProgressBar.swift in Sources */,
 				0579A86729F692A400810DBF /* EscapeHistoryTableViewCell.swift in Sources */,
+				0529A1BD2A09237500236A09 /* SearchView.swift in Sources */,
 				05AEC7D129A70A3E007944A0 /* ThemeTableViewCell.swift in Sources */,
+				0529A1B12A080BA800236A09 /* NetworkingManager.swift in Sources */,
 				0544D53D29ACC2F700394E5E /* LikesViewController.swift in Sources */,
 				0579A86929F8B15D00810DBF /* WelcomeViewController.swift in Sources */,
-				052BB24829E7D1B00009E829 /* UIColor.swift in Sources */,
+				0529A1C22A0A0E1D00236A09 /* ResultsTableController.swift in Sources */,
+				0529A1BF2A09241E00236A09 /* SearchViewTableViewCell.swift in Sources */,
+				052BB24829E7D1B00009E829 /* Extension.swift in Sources */,
 				05AEC7DC29A7B452007944A0 /* ThemeDetailViewContoller.swift in Sources */,
 				05AEC7B429A631E4007944A0 /* SceneDelegate.swift in Sources */,
+				0529A1BB2A0922FB00236A09 /* SearchViewController.swift in Sources */,
 				0579A86F29F91DBF00810DBF /* MainView.swift in Sources */,
 				0579A87329F98BEB00810DBF /* BestThemeViewCell.swift in Sources */,
 				05AEC7D829A7780B007944A0 /* Theme.swift in Sources */,

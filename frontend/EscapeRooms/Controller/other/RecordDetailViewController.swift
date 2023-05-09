@@ -39,13 +39,14 @@ class RecordDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         detailView.themePickerView.dataSource = self
         detailView.themePickerView.delegate = self
         detailView.delegate = self
+        self.navigationController?.navigationBar.tintColor = .customOrange
     }
     
     func configureUI() {
+        
         if let recordData = self.recordData {
             let theme = recordData.theme
             guard let date = recordData.date else { return }
@@ -55,6 +56,10 @@ class RecordDetailViewController: UIViewController {
             let text = recordData.text
             
             self.title = "수정하기"
+            
+            let image = UIImage(systemName: "trash.fill")
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(deleteButtonTapped))
+    
             detailView.themeTextField.text = theme
             detailView.datePicker.date = date
             detailView.minuteTextField.text = minute
@@ -63,6 +68,7 @@ class RecordDetailViewController: UIViewController {
             detailView.textView.text = text
             detailView.textView.textColor = .black
             detailView.saveButton.setTitle("수정하기", for: .normal)
+            
             detailView.textView.becomeFirstResponder()
             
         } else {
@@ -74,12 +80,6 @@ class RecordDetailViewController: UIViewController {
     
     // MARK: - Setting
     
-    func setupUI() {
-        // navigationBar Back Button Color Setting
-        self.navigationController?.navigationBar.tintColor = .customOrange
-        let image = UIImage(systemName: "trash.fill")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(deleteButtonTapped))
-    }
     
     // MARK: - Action
     

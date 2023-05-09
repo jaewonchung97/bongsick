@@ -15,7 +15,7 @@ class MainView: UIView {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.register(ThemeTableViewCell.self, forCellReuseIdentifier: ThemeTableViewCell.identifier)
-        tv.backgroundColor = .black
+        tv.backgroundColor = .customBlack
         tv.showsVerticalScrollIndicator = false
         tv.showsHorizontalScrollIndicator = false
         return tv
@@ -30,7 +30,7 @@ class MainView: UIView {
         layout.itemSize = CGSize(width: width, height: height)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = .black
+        cv.backgroundColor = .customBlack
         cv.register(BestThemeViewCell.self, forCellWithReuseIdentifier: BestThemeViewCell.identifier)
         return cv
     }()

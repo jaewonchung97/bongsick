@@ -11,15 +11,36 @@ final class RecordView: UIView {
     
     // MARK: - Properties
     
-    let testView = UIView()
-
-    private let mainView: UIView = {
+    private let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.backgroundColor = Setup.Color.backgroundColor
+        return sv
+    }()
+    
+    private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .customBlack
+        view.backgroundColor = Setup.Color.backgroundColor
+        return view
+    }()
+
+    private let topView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .customOrange
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         return view
+    }()
+    
+    private let topViewTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "통계"
+        label.textColor = Setup.Color.textColor
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        return label
     }()
     
     private var profileImageView: UIImageView = {
@@ -37,56 +58,12 @@ final class RecordView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "최탈출탈출님의 기록실"
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         label.font = UIFont.systemFont(ofSize: 24)
         return label
     }()
     
-    private let totalCountLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ""
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 18)
-        return label
-    }()
-    
-    private let totalCount: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.text = "총 86 개의 방탈출을 시도, 그 중 76 개를 성공..."
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textAlignment = .right
-        label.layer.cornerRadius = 3
-        label.layer.masksToBounds = true
-        return label
-    }()
-    
-    private let successRateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = ""
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .white
-        return label
-    }()
-    
-    private let successRate: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.text = "나의 성공률은 75.6 %!!!!"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = .right
-        label.layer.cornerRadius = 3
-        label.layer.masksToBounds = true
-        return label
-    }()
-    
-    let progressView = CircularProgressBar()
-    
-    private lazy var profileStackView: UIStackView = {
+    lazy var profileStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [profileImageView, nickNameLabel])
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.axis = .horizontal
@@ -96,11 +73,37 @@ final class RecordView: UIView {
         return sv
     }()
     
-    private let escapeHistoryTitle: UILabel = {
+    private let topMessageLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "총 86 개의 방탈출을 시도, 그 중 76 개를 성공..."
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .right
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    private let bottomMessageLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "나의 성공률은 75.6 %!!!!"
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .right
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    let progressView = CircularProgressBar()
+
+    private let middleTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "나의 탈출 기록"
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
@@ -108,7 +111,7 @@ final class RecordView: UIView {
     let escapeHistoryTableView: UITableView = {
         let tv = UITableView()
         tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.backgroundColor = .customBlack
+        tv.backgroundColor = Setup.Color.backgroundColor
         tv.layer.cornerRadius = 8
         tv.layer.masksToBounds = true
         return tv
@@ -118,7 +121,7 @@ final class RecordView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI()
+        addSubviews()
     }
     
     required init?(coder: NSCoder) {
@@ -132,62 +135,99 @@ final class RecordView: UIView {
     
     // MARK: - Setting
     
-    func setupUI() {
-        self.addSubview(mainView)
-        mainView.addSubview(profileStackView)
-        mainView.addSubview(totalCountLabel)
-        mainView.addSubview(totalCount)
-        mainView.addSubview(progressView)
-        mainView.addSubview(successRateLabel)
-        mainView.addSubview(successRate)
-        self.addSubview(escapeHistoryTitle)
-        self.addSubview(escapeHistoryTableView)
+    func addSubviews() {
+        self.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(profileStackView)
+        contentView.addSubview(topView)
+        contentView.addSubview(topViewTitleLabel)
+        contentView.addSubview(topMessageLabel)
+        contentView.addSubview(bottomMessageLabel)
+        contentView.addSubview(middleTitleLabel)
+        contentView.addSubview(escapeHistoryTableView)
     }
     
     func setConstraints() {
         
-        let mainViewHeight: CGFloat = UIScreen.main.bounds.height / 3
-        let profileStackViewWidth = UIScreen.main.bounds.width
-        progressView.translatesAutoresizingMaskIntoConstraints = false
+        // MARK: - ScrollView
+        let scrollViewConstraints = [
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            scrollView.widthAnchor.constraint(equalTo: self.widthAnchor)
+        ]
+        NSLayoutConstraint.activate(scrollViewConstraints)
         
-        NSLayoutConstraint.activate([
-            mainView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 30),
-            mainView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            mainView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            mainView.heightAnchor.constraint(equalToConstant: mainViewHeight),
-            
-            profileImageView.heightAnchor.constraint(equalToConstant: 50),
-            profileImageView.widthAnchor.constraint(equalToConstant: 50),
-            
-            profileStackView.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10),
-            profileStackView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 20),
+        // MARK: - ContentView
+        let contentViewConstraints = [
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ]
+        NSLayoutConstraint.activate(contentViewConstraints)
+        
+        // MARK: - profileStackView
+        let profileStackViewWidth = UIScreen.main.bounds.size.width - 20
+        let profileStackViewConstraints = [
+            profileStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            profileStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             profileStackView.widthAnchor.constraint(equalToConstant: profileStackViewWidth),
-            
-            totalCountLabel.topAnchor.constraint(equalTo: profileStackView.bottomAnchor, constant: 10),
-            totalCountLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 30),
-            
-            totalCount.topAnchor.constraint(equalTo: totalCountLabel.bottomAnchor, constant: 5),
-            totalCount.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
-            
-            successRateLabel.topAnchor.constraint(equalTo: totalCount.bottomAnchor, constant: 5),
-            successRateLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 100),
-            
-            successRate.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -10),
-            successRate.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
+            profileImageView.heightAnchor.constraint(equalToConstant: 50),
+            profileImageView.widthAnchor.constraint(equalToConstant: 50)
+        ]
+        NSLayoutConstraint.activate(profileStackViewConstraints)
+        
+        // MARK: - TopView
+        let topViewHeight: CGFloat = UIScreen.main.bounds.height / 3
+        let topViewConstraints = [
+            topView.topAnchor.constraint(equalTo: profileStackView.bottomAnchor, constant: 10),
+            topView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            topView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            topView.heightAnchor.constraint(equalToConstant: topViewHeight)
+        ]
+        NSLayoutConstraint.activate(topViewConstraints)
+        
+        // MARK: - TopViewTitleLabel
+        let topViewTitleLabelConstraints = [
+            topViewTitleLabel.topAnchor.constraint(equalTo: topView.topAnchor, constant: 20),
+            topViewTitleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 20)
+        ]
+        NSLayoutConstraint.activate(topViewTitleLabelConstraints)
+        
+        // MARK: - TopMessageLabel
+        let topMessageLabelConstraints = [
+            topMessageLabel.topAnchor.constraint(equalTo: topViewTitleLabel.bottomAnchor, constant: 10),
+            topMessageLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor)
+        ]
+        NSLayoutConstraint.activate(topMessageLabelConstraints)
+        
+        // MARK: - bottomMessageLabel
+        let bottomMessageLabelConstraints = [
+            bottomMessageLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -10),
+            bottomMessageLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
+        ]
+        NSLayoutConstraint.activate(bottomMessageLabelConstraints)
 
-            progressView.topAnchor.constraint(equalTo: successRateLabel.bottomAnchor, constant: 10),
-            progressView.widthAnchor.constraint(equalToConstant: 130),
-            progressView.heightAnchor.constraint(equalToConstant: 130),
-            progressView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor),
-            
-            escapeHistoryTitle.topAnchor.constraint(equalTo: mainView.bottomAnchor, constant: 15),
-            escapeHistoryTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            
-            escapeHistoryTableView.topAnchor.constraint(equalTo: escapeHistoryTitle.bottomAnchor, constant: 10),
-            escapeHistoryTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 5),
-            escapeHistoryTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            escapeHistoryTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        ])
+        // MARK: - middleTitleLabel
+        let middleTitleLabelConstraints = [
+            middleTitleLabel.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 15),
+            middleTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+        ]
+        NSLayoutConstraint.activate(middleTitleLabelConstraints)
+        
+        // MARK: - escapeHistoryTableView
+        let escapeHistoryTableViewConstraints = [
+            escapeHistoryTableView.topAnchor.constraint(equalTo: middleTitleLabel.bottomAnchor, constant: 10),
+            escapeHistoryTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            escapeHistoryTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            escapeHistoryTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            escapeHistoryTableView.heightAnchor.constraint(equalToConstant: 400)
+        ]
+        NSLayoutConstraint.activate(escapeHistoryTableViewConstraints)
+
     }
     
     // MARK: - Action

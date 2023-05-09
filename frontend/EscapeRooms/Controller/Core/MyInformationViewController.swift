@@ -15,6 +15,8 @@ final class MyInformationViewController: UIViewController {
     
     // MARK: - Components
     
+    var themes: [Theme] = []
+    
     let logoutButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .orange
@@ -52,15 +54,29 @@ final class MyInformationViewController: UIViewController {
 
     @objc func logoutButtonTapped() {
         print(#function)
-        do {
-            try Auth.auth().signOut()
-            let vc = LoginViewController()
-            vc.hidesBottomBarWhenPushed = true
-            vc.navigationItem.hidesBackButton = true
-            self.navigationController?.pushViewController(vc, animated: true)
-        } catch let error as NSError {
-            print("ERROR: \(error)")
+        NetworkingManager.shared.fetchTheme { result in
+            switch result {
+            case Result.success(let themeData):
+                self.themes = themeData
+//                DispatchQueue.main.async {
+//                    self.mainView.titleCollectionView.reloadData()
+//                }
+                print("MainVC에서 데이터를 전달 받음.")
+            case Result.failure(let error):
+                print(error.localizedDescription)
+            }
         }
+        print(themes.count)
+//        print(#function)
+//        do {
+//            try Auth.auth().signOut()
+//            let vc = LoginViewController()
+//            vc.hidesBottomBarWhenPushed = true
+//            vc.navigationItem.hidesBackButton = true
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        } catch let error as NSError {
+//            print("ERROR: \(error)")
+//        }
     }
 
 }

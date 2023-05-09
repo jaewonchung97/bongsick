@@ -14,6 +14,13 @@ final class ThemeDetailView: UIView {
     
     let likeButtonConfigure = UIImage.SymbolConfiguration(pointSize: 25)
     
+    var imageURL: String? {
+        didSet {
+            guard let url = imageURL else { return }
+            NetworkingManager.shared.loadImage(url, imageView: self.imageView)
+        }
+    }
+    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +38,7 @@ final class ThemeDetailView: UIView {
         return view
     }()
 
-    let image: UIImageView = {
+    let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
@@ -246,7 +253,7 @@ final class ThemeDetailView: UIView {
         self.addSubview(scrollView)
         
         scrollView.addSubview(contentView)
-        contentView.addSubview(image)
+        contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(companyLabel)
         contentView.addSubview(stackView)
@@ -283,11 +290,11 @@ final class ThemeDetailView: UIView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         
-            image.topAnchor.constraint(equalTo: contentView.topAnchor),
-            image.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            image.heightAnchor.constraint(equalToConstant: 450),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 450),
             
-            nameLabel.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 10),
+            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             
             companyLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
@@ -336,6 +343,10 @@ final class ThemeDetailView: UIView {
             bottomButtonStackView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 30),
             bottomButtonStackView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
         ])
+    }
+    
+    func loadImage() {
+        
     }
     
     // MARK: - Action

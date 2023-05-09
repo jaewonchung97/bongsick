@@ -20,7 +20,11 @@ final class ThemeDetailViewContoller: UIViewController {
     // 지도에 표시 할 좌표 설정
     let coordinate = CLLocationCoordinate2D(latitude: 37.4974033, longitude: 127.0310522)
     
-    var themeData: Theme?
+    var theme: Theme? {
+        didSet {
+            configureCell()
+        }
+    }
     
     // MARK: - LifeCycle
     
@@ -30,7 +34,6 @@ final class ThemeDetailViewContoller: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         configureDelegate()
         locationInfomation()
         addMapPin()
@@ -38,16 +41,18 @@ final class ThemeDetailViewContoller: UIViewController {
     
     // MARK: - Setting
     
-    func setupUI() {
-        title = themeData?.name
-        detailView.image.image = themeData?.image
-        detailView.nameLabel.text = themeData?.name
-        detailView.companyLabel.text = themeData?.company
-        detailView.difficultyLabel.text = themeData?.difficulty
-        detailView.playTimeLabel.text = themeData?.playTime
-        detailView.personnelLabel.text = themeData?.personnel
-        detailView.storyTextView.text = themeData?.story
-        detailView.priceLabel.text = themeData?.price
+    func configureCell() {
+        title = theme?.name
+        detailView.imageURL = theme?.imgURL
+        detailView.nameLabel.text = theme?.name
+        detailView.companyLabel.text = theme?.companyID
+        guard let playTime = theme?.playTime, let difficulty = theme?.difficulty else { return }
+        detailView.difficultyLabel.text = String(difficulty)
+        detailView.playTimeLabel.text = String(playTime)
+        guard let personnel = theme?.personnelMin else { return }
+        detailView.personnelLabel.text = String(personnel)
+        detailView.storyTextView.text = theme?.story
+        detailView.priceLabel.text = "25000원"
     }
     
     func configureDelegate() {
@@ -67,25 +72,6 @@ final class ThemeDetailViewContoller: UIViewController {
         pin.subtitle = "서울시 강남구 역삼동 824-25 대우디오빌플러스 지하 1층 111호" 
         detailView.mapView.addAnnotation(pin)
     }
-    
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
-//
-//        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Custom")
-//
-//        if annotationView == nil {
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Custom")
-//            annotationView?.canShowCallout = true
-//
-//        } else {
-//            annotationView?.annotation = annotation
-//
-//        }
-//
-//        annotationView?.image = exitImage
-//
-//        return MKAnnotationView()
-//    }
 }
 
 // MARK: - Extension
