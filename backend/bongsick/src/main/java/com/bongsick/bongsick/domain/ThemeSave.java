@@ -5,8 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Theme {
-    String id;
+public class ThemeSave {
     String name;
     List<String> companies;
     int difficulty;

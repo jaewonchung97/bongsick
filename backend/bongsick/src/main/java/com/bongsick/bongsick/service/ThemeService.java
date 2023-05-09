@@ -14,7 +14,7 @@ public class ThemeService {
     private final Repository repository;
 
     @Autowired
-    public ThemeService(FirebaseRepository repository) {
+    public ThemeService(Repository repository) {
         this.repository = repository;
     }
 

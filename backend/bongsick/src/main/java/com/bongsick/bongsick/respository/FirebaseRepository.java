@@ -2,18 +2,19 @@ package com.bongsick.bongsick.respository;
 
 
 import com.bongsick.bongsick.domain.Company;
+import com.bongsick.bongsick.domain.CompanySave;
 import com.bongsick.bongsick.domain.Theme;
+import com.bongsick.bongsick.domain.ThemeSave;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 @Repository
@@ -109,4 +110,66 @@ public class FirebaseRepository implements com.bongsick.bongsick.respository.Rep
         }
         return themes;
     }
+
+    @Override
+    public String saveTheme(ThemeSave theme) {
+        // TODO - Add Exception When it already existed
+
+        ApiFuture<DocumentReference> add = db.collection(THEMES_COLLECTION).add(theme);
+        try {
+            return add.get().getId();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String saveCompany(CompanySave company) {
+        // TODO - Add Exception When it already existed
+        ApiFuture<DocumentReference> add = db.collection(COMPANIES_COLLECTION).add(company);
+        try {
+            return add.get().getId();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteThemes() {
+        Iterable<DocumentReference> documentReferences = db.collection(THEMES_COLLECTION).listDocuments();
+        for (DocumentReference documentReference : documentReferences) {
+            documentReference.delete();
+        }
+
+    }
+
+    @Override
+    public List<String> getAllCompanies() {
+        Iterable<DocumentReference> docRefs = db.collection(THEMES_COLLECTION).listDocuments();
+
+        Set<String> companies = new HashSet<>();
+
+        for (DocumentReference docRef : docRefs) {
+            ApiFuture<DocumentSnapshot> future = docRef.get();
+            DocumentSnapshot document = null;
+            try {
+                document = future.get();
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+
+            Theme theme = document.toObject(Theme.class);
+            assert theme != null;
+            companies.addAll(theme.getCompanies());
+        }
+
+        return companies.stream().toList();
+    }
+
+    @Override
+    public void changeAllCompanyName(String companyName, String newCompanyName) {
+        // TODO
+    }
+
+
 }

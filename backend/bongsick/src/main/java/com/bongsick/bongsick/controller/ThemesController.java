@@ -19,7 +19,7 @@ public class ThemesController {
         this.themeService = themeService;
     }
 
-    @GetMapping("/theme")
+    @GetMapping("/themes")
     public List<Theme> getThemes() {
         return themeService.getThemes();
     }
@@ -31,7 +31,7 @@ public class ThemesController {
         return themeService.getThemeDetail(themeId);
     }
 
-    @GetMapping("/company")
+    @GetMapping("/companies")
     public List<Company> getCompanies() {
         return themeService.getCompanies();
     }
