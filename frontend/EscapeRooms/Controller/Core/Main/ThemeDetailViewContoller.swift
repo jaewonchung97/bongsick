@@ -22,7 +22,13 @@ final class ThemeDetailViewContoller: UIViewController {
     
     var theme: Theme? {
         didSet {
-            configureCell()
+            setupThemeData()
+        }
+    }
+    
+    var likedTheme: LikedData? {
+        didSet {
+            setupLikedThemeData()
         }
     }
     
@@ -41,18 +47,14 @@ final class ThemeDetailViewContoller: UIViewController {
     
     // MARK: - Setting
     
-    func configureCell() {
-        title = theme?.name
-        detailView.imageURL = theme?.imgURL
-        detailView.nameLabel.text = theme?.name
-        detailView.companyLabel.text = theme?.companyID
-        guard let playTime = theme?.playTime, let difficulty = theme?.difficulty else { return }
-        detailView.difficultyLabel.text = String(difficulty)
-        detailView.playTimeLabel.text = String(playTime)
-        guard let personnel = theme?.personnelMin else { return }
-        detailView.personnelLabel.text = String(personnel)
-        detailView.storyTextView.text = theme?.story
-        detailView.priceLabel.text = "25000원"
+    func setupThemeData() {
+            title = theme?.name
+            detailView.theme = theme
+    }
+    
+    func setupLikedThemeData() {
+        title = likedTheme?.name
+        detailView.likedTheme = likedTheme
     }
     
     func configureDelegate() {
@@ -68,7 +70,7 @@ final class ThemeDetailViewContoller: UIViewController {
     func addMapPin() {
         let pin = MKPointAnnotation()
         pin.coordinate = coordinate
-        pin.title = "비트포비아 강남 던전"
+        pin.title = theme?.companies[0]
         pin.subtitle = "서울시 강남구 역삼동 824-25 대우디오빌플러스 지하 1층 111호" 
         detailView.mapView.addAnnotation(pin)
     }

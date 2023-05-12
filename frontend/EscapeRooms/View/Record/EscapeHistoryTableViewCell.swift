@@ -22,8 +22,8 @@ class EscapeHistoryTableViewCell: UITableViewCell {
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = Setup.Color.textColor
+        label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
     
@@ -41,16 +41,16 @@ class EscapeHistoryTableViewCell: UITableViewCell {
     private let themeNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = Setup.Color.textColor
+        label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
     
     private let escapeTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = Setup.Color.textColor
+        label.font = UIFont.systemFont(ofSize: 10)
         return label
     }()
     
@@ -94,10 +94,10 @@ class EscapeHistoryTableViewCell: UITableViewCell {
     // MARK: - Setting
     
     func setupUI() {
-        self.backgroundColor = .customBlack
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.cornerRadius = 8
+        self.backgroundColor = Setup.Color.backgroundColor
+//        self.layer.borderWidth = 0.5
+//        self.layer.borderColor = UIColor.black.cgColor
+//        self.layer.cornerRadius = 8
         self.addSubview(stackView)
     }
     

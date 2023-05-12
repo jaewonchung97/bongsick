@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		0529A1B12A080BA800236A09 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B02A080BA800236A09 /* NetworkingManager.swift */; };
-		0529A1B32A08BCA800236A09 /* ThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B22A08BCA800236A09 /* ThemeData.swift */; };
+		0529A1B32A08BCA800236A09 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B22A08BCA800236A09 /* Theme.swift */; };
 		0529A1B52A08C79300236A09 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B42A08C79300236A09 /* Constant.swift */; };
 		0529A1B92A08E0D100236A09 /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1B82A08E0D100236A09 /* TypeAlias.swift */; };
 		0529A1BB2A0922FB00236A09 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1BA2A0922FB00236A09 /* SearchViewController.swift */; };
 		0529A1BD2A09237500236A09 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1BC2A09237500236A09 /* SearchView.swift */; };
 		0529A1BF2A09241E00236A09 /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1BE2A09241E00236A09 /* SearchViewTableViewCell.swift */; };
-		0529A1C22A0A0E1D00236A09 /* ResultsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1C12A0A0E1D00236A09 /* ResultsTableController.swift */; };
+		0529A1C42A0B46F500236A09 /* SpaceSeparationLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1C32A0B46F500236A09 /* SpaceSeparationLine.swift */; };
+		0529A1CF2A0BFD2500236A09 /* LikedData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1CD2A0BFD2500236A09 /* LikedData+CoreDataClass.swift */; };
+		0529A1D02A0BFD2500236A09 /* LikedData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0529A1CE2A0BFD2500236A09 /* LikedData+CoreDataProperties.swift */; };
 		052BB23329D571700009E829 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB23229D571700009E829 /* RecordViewController.swift */; };
 		052BB23529D5726B0009E829 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB23429D5726B0009E829 /* RecordView.swift */; };
 		052BB23929DF05AF0009E829 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052BB23829DF05AF0009E829 /* RecordDetailView.swift */; };
@@ -43,7 +45,6 @@
 		0544D58229BA055500394E5E /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544D58129BA055500394E5E /* MyInformationViewController.swift */; };
 		0579A86729F692A400810DBF /* EscapeHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579A86629F692A400810DBF /* EscapeHistoryTableViewCell.swift */; };
 		0579A86929F8B15D00810DBF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579A86829F8B15D00810DBF /* WelcomeViewController.swift */; };
-		0579A86B29F8EEDD00810DBF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579A86A29F8EEDD00810DBF /* User.swift */; };
 		0579A86D29F91D1700810DBF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579A86C29F91D1700810DBF /* MainViewController.swift */; };
 		0579A86F29F91DBF00810DBF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579A86E29F91DBF00810DBF /* MainView.swift */; };
 		0579A87129F91EA900810DBF /* ThemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0579A87029F91EA900810DBF /* ThemeCollectionViewCell.swift */; };
@@ -56,7 +57,6 @@
 		05AEC7BE29A631E5007944A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05AEC7BD29A631E5007944A0 /* Assets.xcassets */; };
 		05AEC7C129A631E5007944A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05AEC7BF29A631E5007944A0 /* LaunchScreen.storyboard */; };
 		05AEC7D129A70A3E007944A0 /* ThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7D029A70A3E007944A0 /* ThemeTableViewCell.swift */; };
-		05AEC7D829A7780B007944A0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7D729A7780B007944A0 /* Theme.swift */; };
 		05AEC7DA29A7784B007944A0 /* ThemeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7D929A7784B007944A0 /* ThemeDataManager.swift */; };
 		05AEC7DC29A7B452007944A0 /* ThemeDetailViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7DB29A7B452007944A0 /* ThemeDetailViewContoller.swift */; };
 		05AEC7DE29A7B4DA007944A0 /* ThemeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AEC7DD29A7B4DA007944A0 /* ThemeDetailView.swift */; };
@@ -64,13 +64,15 @@
 
 /* Begin PBXFileReference section */
 		0529A1B02A080BA800236A09 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
-		0529A1B22A08BCA800236A09 /* ThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeData.swift; sourceTree = "<group>"; };
+		0529A1B22A08BCA800236A09 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		0529A1B42A08C79300236A09 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		0529A1B82A08E0D100236A09 /* TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAlias.swift; sourceTree = "<group>"; };
 		0529A1BA2A0922FB00236A09 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0529A1BC2A09237500236A09 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		0529A1BE2A09241E00236A09 /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
-		0529A1C12A0A0E1D00236A09 /* ResultsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableController.swift; sourceTree = "<group>"; };
+		0529A1C32A0B46F500236A09 /* SpaceSeparationLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceSeparationLine.swift; sourceTree = "<group>"; };
+		0529A1CD2A0BFD2500236A09 /* LikedData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikedData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0529A1CE2A0BFD2500236A09 /* LikedData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikedData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		052BB23229D571700009E829 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		052BB23429D5726B0009E829 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		052BB23829DF05AF0009E829 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
@@ -88,7 +90,6 @@
 		0544D58129BA055500394E5E /* MyInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
 		0579A86629F692A400810DBF /* EscapeHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscapeHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		0579A86829F8B15D00810DBF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		0579A86A29F8EEDD00810DBF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0579A86C29F91D1700810DBF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0579A86E29F91DBF00810DBF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0579A87029F91EA900810DBF /* ThemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		05AEC7C029A631E5007944A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05AEC7C229A631E5007944A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05AEC7D029A70A3E007944A0 /* ThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTableViewCell.swift; sourceTree = "<group>"; };
-		05AEC7D729A7780B007944A0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		05AEC7D929A7784B007944A0 /* ThemeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDataManager.swift; sourceTree = "<group>"; };
 		05AEC7DB29A7B452007944A0 /* ThemeDetailViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDetailViewContoller.swift; sourceTree = "<group>"; };
 		05AEC7DD29A7B4DA007944A0 /* ThemeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDetailView.swift; sourceTree = "<group>"; };
@@ -144,9 +144,43 @@
 			isa = PBXGroup;
 			children = (
 				0529A1BA2A0922FB00236A09 /* SearchViewController.swift */,
-				0529A1C12A0A0E1D00236A09 /* ResultsTableController.swift */,
+				05AEC7DB29A7B452007944A0 /* ThemeDetailViewContoller.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		0529A1C52A0B842E00236A09 /* Likes */ = {
+			isa = PBXGroup;
+			children = (
+				0544D53C29ACC2F700394E5E /* LikesViewController.swift */,
+			);
+			name = Likes;
+			path = ../Controller/Core/Likes;
+			sourceTree = "<group>";
+		};
+		0529A1C62A0B844200236A09 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				052BB23229D571700009E829 /* RecordViewController.swift */,
+				052BB23C29DF0B440009E829 /* RecordDetailViewController.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		0529A1C72A0B845B00236A09 /* Infomation */ = {
+			isa = PBXGroup;
+			children = (
+				0544D58129BA055500394E5E /* MyInformationViewController.swift */,
+			);
+			path = Infomation;
+			sourceTree = "<group>";
+		};
+		0529A1C82A0BEBE900236A09 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0529A1B02A080BA800236A09 /* NetworkingManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		052BB24629E7D19F0009E829 /* Extension */ = {
@@ -160,10 +194,10 @@
 		052BB24929F3B09F0009E829 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				052BB24B29F3B1160009E829 /* TabBarViewController.swift */,
+				0579A86C29F91D1700810DBF /* MainViewController.swift */,
 				0544D57D29B9AA5F00394E5E /* SignUpViewController.swift */,
 				0544D57B29B998B700394E5E /* LoginViewController.swift */,
-				05AEC7DB29A7B452007944A0 /* ThemeDetailViewContoller.swift */,
-				052BB23C29DF0B440009E829 /* RecordDetailViewController.swift */,
 				0579A86829F8B15D00810DBF /* WelcomeViewController.swift */,
 			);
 			path = other;
@@ -172,12 +206,9 @@
 		052BB24A29F3B0A50009E829 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0529A1C72A0B845B00236A09 /* Infomation */,
+				0529A1C62A0B844200236A09 /* Record */,
 				0529A1C02A0A0CB400236A09 /* Main */,
-				0544D53C29ACC2F700394E5E /* LikesViewController.swift */,
-				0544D58129BA055500394E5E /* MyInformationViewController.swift */,
-				052BB23229D571700009E829 /* RecordViewController.swift */,
-				052BB24B29F3B1160009E829 /* TabBarViewController.swift */,
-				0579A86C29F91D1700810DBF /* MainViewController.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -216,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				0579A8762A07532E00810DBF /* CircularProgressBar.swift */,
+				0529A1C32A0B46F500236A09 /* SpaceSeparationLine.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -223,7 +255,6 @@
 		05AEC7A529A631E4007944A0 = {
 			isa = PBXGroup;
 			children = (
-				0529A1B72A08E0B300236A09 /* Helper */,
 				05AEC7B029A631E4007944A0 /* EscapeRooms */,
 				05AEC7AF29A631E4007944A0 /* Products */,
 			);
@@ -242,6 +273,8 @@
 			children = (
 				05AEC7B129A631E4007944A0 /* AppDelegate.swift */,
 				05AEC7B329A631E4007944A0 /* SceneDelegate.swift */,
+				0529A1B72A08E0B300236A09 /* Helper */,
+				0529A1C82A0BEBE900236A09 /* Networking */,
 				052BB24629E7D19F0009E829 /* Extension */,
 				05AEC7D629A777F9007944A0 /* Model */,
 				05AEC7C929A631F5007944A0 /* View */,
@@ -266,6 +299,7 @@
 				0579A8782A0777C400810DBF /* Theme */,
 				0579A87A2A0777F800810DBF /* Likes */,
 				0579A8792A0777CD00810DBF /* Record */,
+				0529A1C52A0B842E00236A09 /* Likes */,
 				0579A87B2A0777FF00810DBF /* Other */,
 				0529A1BC2A09237500236A09 /* SearchView.swift */,
 				0529A1BE2A09241E00236A09 /* SearchViewTableViewCell.swift */,
@@ -289,14 +323,13 @@
 		05AEC7D629A777F9007944A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				05AEC7D729A7780B007944A0 /* Theme.swift */,
+				0529A1B22A08BCA800236A09 /* Theme.swift */,
 				05AEC7D929A7784B007944A0 /* ThemeDataManager.swift */,
 				052BB23E29E669E40009E829 /* CoreDataManager.swift */,
+				0529A1CD2A0BFD2500236A09 /* LikedData+CoreDataClass.swift */,
+				0529A1CE2A0BFD2500236A09 /* LikedData+CoreDataProperties.swift */,
 				052BB24229E70B760009E829 /* RecordData+CoreDataClass.swift */,
 				052BB24329E70B760009E829 /* RecordData+CoreDataProperties.swift */,
-				0579A86A29F8EEDD00810DBF /* User.swift */,
-				0529A1B02A080BA800236A09 /* NetworkingManager.swift */,
-				0529A1B22A08BCA800236A09 /* ThemeData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -392,15 +425,16 @@
 				052BB24429E70B760009E829 /* RecordData+CoreDataClass.swift in Sources */,
 				0529A1B52A08C79300236A09 /* Constant.swift in Sources */,
 				0544D57C29B998B700394E5E /* LoginViewController.swift in Sources */,
-				0529A1B32A08BCA800236A09 /* ThemeData.swift in Sources */,
+				0529A1B32A08BCA800236A09 /* Theme.swift in Sources */,
 				0544D53F29AF594500394E5E /* LikesCell.swift in Sources */,
 				052BB23529D5726B0009E829 /* RecordView.swift in Sources */,
-				0579A86B29F8EEDD00810DBF /* User.swift in Sources */,
 				05AEC7DE29A7B4DA007944A0 /* ThemeDetailView.swift in Sources */,
 				0529A1B92A08E0D100236A09 /* TypeAlias.swift in Sources */,
 				0579A86D29F91D1700810DBF /* MainViewController.swift in Sources */,
 				0579A87129F91EA900810DBF /* ThemeCollectionViewCell.swift in Sources */,
+				0529A1D02A0BFD2500236A09 /* LikedData+CoreDataProperties.swift in Sources */,
 				052BB23329D571700009E829 /* RecordViewController.swift in Sources */,
+				0529A1CF2A0BFD2500236A09 /* LikedData+CoreDataClass.swift in Sources */,
 				05AEC7BC29A631E4007944A0 /* EscapeRooms.xcdatamodeld in Sources */,
 				0544D58229BA055500394E5E /* MyInformationViewController.swift in Sources */,
 				052BB24C29F3B1160009E829 /* TabBarViewController.swift in Sources */,
@@ -413,10 +447,10 @@
 				0579A86729F692A400810DBF /* EscapeHistoryTableViewCell.swift in Sources */,
 				0529A1BD2A09237500236A09 /* SearchView.swift in Sources */,
 				05AEC7D129A70A3E007944A0 /* ThemeTableViewCell.swift in Sources */,
+				0529A1C42A0B46F500236A09 /* SpaceSeparationLine.swift in Sources */,
 				0529A1B12A080BA800236A09 /* NetworkingManager.swift in Sources */,
 				0544D53D29ACC2F700394E5E /* LikesViewController.swift in Sources */,
 				0579A86929F8B15D00810DBF /* WelcomeViewController.swift in Sources */,
-				0529A1C22A0A0E1D00236A09 /* ResultsTableController.swift in Sources */,
 				0529A1BF2A09241E00236A09 /* SearchViewTableViewCell.swift in Sources */,
 				052BB24829E7D1B00009E829 /* Extension.swift in Sources */,
 				05AEC7DC29A7B452007944A0 /* ThemeDetailViewContoller.swift in Sources */,
@@ -424,7 +458,6 @@
 				0529A1BB2A0922FB00236A09 /* SearchViewController.swift in Sources */,
 				0579A86F29F91DBF00810DBF /* MainView.swift in Sources */,
 				0579A87329F98BEB00810DBF /* BestThemeViewCell.swift in Sources */,
-				05AEC7D829A7780B007944A0 /* Theme.swift in Sources */,
 				0544D57E29B9AA5F00394E5E /* SignUpViewController.swift in Sources */,
 				05AEC7DA29A7784B007944A0 /* ThemeDataManager.swift in Sources */,
 			);

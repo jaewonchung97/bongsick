@@ -21,14 +21,14 @@ final class RecordView: UIView {
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Setup.Color.backgroundColor
+        view.backgroundColor = .customLightOrange
         return view
     }()
 
     private let topView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .customOrange
+        view.backgroundColor = Setup.Color.backgroundColor
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         return view
@@ -39,7 +39,7 @@ final class RecordView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "통계"
         label.textColor = Setup.Color.textColor
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
     
@@ -73,13 +73,126 @@ final class RecordView: UIView {
         return sv
     }()
     
-    private let topMessageLabel: UILabel = {
+    private let totalTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Setup.Color.textColor
-        label.text = "총 86 개의 방탈출을 시도, 그 중 76 개를 성공..."
+        label.text = "탈출 시도"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    private let totalLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "80 번"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    lazy var totalStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [totalTitleLabel, totalLabel])
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .vertical
+        sv.alignment = .fill
+        sv.distribution = .fill
+        sv.spacing = 5
+        return sv
+    }()
+    
+    private let successTotalTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "성공한 테마"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    private let successTotalLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "75 개"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    lazy var successTotalStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [successTotalTitleLabel, successTotalLabel])
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .vertical
+        sv.alignment = .fill
+        sv.distribution = .fill
+        sv.spacing = 5
+        return sv
+    }()
+    
+    private let successRateTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "탈출 성공률"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    private let successRateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "75 %"
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 3
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    lazy var successRateStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [successRateTitleLabel, successRateLabel])
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .vertical
+        sv.alignment = .fill
+        sv.distribution = .fill
+        sv.spacing = 5
+        return sv
+    }()
+    
+    
+    lazy var mainStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [totalStackView, successTotalStackView, successRateStackView])
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.axis = .horizontal
+        sv.alignment = .fill
+        sv.distribution = .fill
+        sv.spacing = 10
+        return sv
+    }()
+    
+    private let minClearTimeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = Setup.Color.textColor
+        label.text = "제일 빠르게 탈출한 테마"
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textAlignment = .right
+        label.textAlignment = .center
         label.layer.cornerRadius = 3
         label.layer.masksToBounds = true
         return label
@@ -89,7 +202,7 @@ final class RecordView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Setup.Color.textColor
-        label.text = "나의 성공률은 75.6 %!!!!"
+        label.text = "성공률"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .right
         label.layer.cornerRadius = 3
@@ -102,18 +215,17 @@ final class RecordView: UIView {
     private let middleTitleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "나의 탈출 기록"
+        label.text = "최근 탈출 기록"
         label.textColor = Setup.Color.textColor
         label.font = UIFont.boldSystemFont(ofSize: 22)
         return label
     }()
     
     let escapeHistoryTableView: UITableView = {
-        let tv = UITableView()
+        let tv = UITableView(frame: .zero, style: .grouped)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.backgroundColor = Setup.Color.backgroundColor
-        tv.layer.cornerRadius = 8
-        tv.layer.masksToBounds = true
+        tv.isScrollEnabled = false
         return tv
     }()
     
@@ -140,15 +252,11 @@ final class RecordView: UIView {
         scrollView.addSubview(contentView)
         contentView.addSubview(profileStackView)
         contentView.addSubview(topView)
-        contentView.addSubview(topViewTitleLabel)
-        contentView.addSubview(topMessageLabel)
-        contentView.addSubview(bottomMessageLabel)
-        contentView.addSubview(middleTitleLabel)
+        contentView.addSubview(mainStackView)
         contentView.addSubview(escapeHistoryTableView)
     }
     
     func setConstraints() {
-        
         // MARK: - ScrollView
         let scrollViewConstraints = [
             scrollView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -183,54 +291,30 @@ final class RecordView: UIView {
         // MARK: - TopView
         let topViewHeight: CGFloat = UIScreen.main.bounds.height / 3
         let topViewConstraints = [
-            topView.topAnchor.constraint(equalTo: profileStackView.bottomAnchor, constant: 10),
+            topView.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10),
             topView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             topView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             topView.heightAnchor.constraint(equalToConstant: topViewHeight)
         ]
         NSLayoutConstraint.activate(topViewConstraints)
         
-        // MARK: - TopViewTitleLabel
-        let topViewTitleLabelConstraints = [
-            topViewTitleLabel.topAnchor.constraint(equalTo: topView.topAnchor, constant: 20),
-            topViewTitleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 20)
+        // MARK: - totalStackView
+        let mainStackViewConstraints = [
+            mainStackView.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -15),
+            mainStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ]
-        NSLayoutConstraint.activate(topViewTitleLabelConstraints)
-        
-        // MARK: - TopMessageLabel
-        let topMessageLabelConstraints = [
-            topMessageLabel.topAnchor.constraint(equalTo: topViewTitleLabel.bottomAnchor, constant: 10),
-            topMessageLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor)
-        ]
-        NSLayoutConstraint.activate(topMessageLabelConstraints)
-        
-        // MARK: - bottomMessageLabel
-        let bottomMessageLabelConstraints = [
-            bottomMessageLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -10),
-            bottomMessageLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
-        ]
-        NSLayoutConstraint.activate(bottomMessageLabelConstraints)
-
-        // MARK: - middleTitleLabel
-        let middleTitleLabelConstraints = [
-            middleTitleLabel.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 15),
-            middleTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-        ]
-        NSLayoutConstraint.activate(middleTitleLabelConstraints)
+        NSLayoutConstraint.activate(mainStackViewConstraints)
         
         // MARK: - escapeHistoryTableView
         let escapeHistoryTableViewConstraints = [
-            escapeHistoryTableView.topAnchor.constraint(equalTo: middleTitleLabel.bottomAnchor, constant: 10),
-            escapeHistoryTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            escapeHistoryTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            escapeHistoryTableView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 15),
+            escapeHistoryTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            escapeHistoryTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             escapeHistoryTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            escapeHistoryTableView.heightAnchor.constraint(equalToConstant: 400)
+            escapeHistoryTableView.heightAnchor.constraint(equalToConstant: 450)
         ]
         NSLayoutConstraint.activate(escapeHistoryTableViewConstraints)
-
     }
     
     // MARK: - Action
-
-
 }

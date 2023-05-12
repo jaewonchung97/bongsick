@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol SearchViewTableViewCellDelegate {
+    func likeButtonTapped(cell: SearchViewTableViewCell, isLiked: Bool)
+}
+
 class SearchViewTableViewCell: UITableViewCell {
     
     static let identifier = "SearchViewTableViewCell"
     
     // MARK: - Properties
+    
+    var delegate: SearchViewTableViewCellDelegate?
     
     var theme: Theme? {
         didSet {
@@ -22,11 +28,12 @@ class SearchViewTableViewCell: UITableViewCell {
     let mainImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     
     lazy var stackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [nameLabel, companyLabel])
+        let sv = UIStackView(arrangedSubviews: [nameLabel, companyLabel, difficultyLabel])
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.axis = .vertical
         sv.alignment = .fill
@@ -68,6 +75,14 @@ class SearchViewTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    lazy var likeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .lightGray
+        button.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        return button
+    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -92,6 +107,7 @@ class SearchViewTableViewCell: UITableViewCell {
     func addSubViews() {
         contentView.addSubview(mainImageView)
         contentView.addSubview(stackView)
+        contentView.addSubview(likeButton)
     }
     
     func setConstraints() {
@@ -108,13 +124,36 @@ class SearchViewTableViewCell: UITableViewCell {
             mainImageView.widthAnchor.constraint(equalToConstant: TableView.Cell.width)
         ]
         NSLayoutConstraint.activate(themeImageViewConstraints)
+        
+        let likeButtonConstraints = [
+            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+        ]
+        NSLayoutConstraint.activate(likeButtonConstraints)
+    }
+    
+    func setupButton() {
+        if theme?.isLiked == false {
+            likeButton.setImage(UIImage(systemName: "heart", withConfiguration: Button.LikeButton.symbolConfigure), for: .normal)
+            likeButton.tintColor = .lightGray
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart.fill", withConfiguration: Button.LikeButton.symbolConfigure), for: .normal)
+            likeButton.tintColor = .customOrange
+        }
     }
     
     func setupData() {
         guard let url = theme?.imgURL else { return }
         NetworkingManager.shared.loadImage(url, imageView: mainImageView)
         nameLabel.text = theme?.name
-        companyLabel.text = theme?.companyID
+        companyLabel.text = theme?.companies[0]
+        difficultyLabel.text = ""
+    }
+    
+    // MARK: - Action
+    @objc func likeButtonTapped() {
+        guard let state = theme?.isLiked else { return }
+        delegate?.likeButtonTapped(cell: self, isLiked: state)
     }
 
 }

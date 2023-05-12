@@ -12,6 +12,7 @@ extension UIColor {
     static let customGray = UIColor(red: 204/255, green: 204/255, blue: 204/255, alpha: 1)
     static let customGreen = UIColor(red: 14/255, green: 173/255, blue: 105/255, alpha: 1)
     static let customOrange = UIColor(red: 227/255, green: 100/255, blue: 20/255, alpha: 1)
+    static let customLightOrange = UIColor(red: 255/255, green: 191/255, blue: 105/255, alpha: 1)
     static let customBlack = UIColor(red: 37/255, green: 35/255, blue: 37/255, alpha: 1)
     static let recordDetailLabelColor = UIColor.white
     static let mainBackgroungColor = UIColor.white

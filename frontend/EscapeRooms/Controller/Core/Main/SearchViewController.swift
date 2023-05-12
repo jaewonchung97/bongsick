@@ -11,11 +11,11 @@ class SearchViewController: UIViewController {
 
     // MARK: - Property
     
-    private let networkManager = NetworkingManager.shared
+    private let themeDataManager = ThemeDataManager.shared
+    private let coreDataManager = CoreDataManager.shared
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    var themeArray: [Theme] = []
     var filteredArray: [Theme] = []
     
     var isSearchBarEmpty: Bool {
@@ -32,6 +32,8 @@ class SearchViewController: UIViewController {
         return tv
     }()
     
+    // MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
@@ -39,6 +41,13 @@ class SearchViewController: UIViewController {
         configureTableView()
         setConstraints()
         setupThemeData()
+        print("DEBUG: SearchView Did Load")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupThemeData()
+        print("DEBUG: SearchView Will Appear")
     }
     
     func addSubViews() {
@@ -68,18 +77,13 @@ class SearchViewController: UIViewController {
     }
     
     func setupThemeData() {
-        networkManager.fetchTheme { result in
-            switch result {
-            case Result.success(let themeData):
-                self.themeArray = themeData
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            case Result.failure(let error):
-                print(error.localizedDescription)
+        themeDataManager.setupDataFromAPI {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
     }
+        
 
 }
 
@@ -88,20 +92,23 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if isFiltering {
             return filteredArray.count
         } else {
-            return themeArray.count
+            return themeDataManager.getThemeArraysFromAPI().count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchViewTableViewCell.identifier, for: indexPath) as? SearchViewTableViewCell else { return UITableViewCell() }
         
+        let theme = themeDataManager.getThemeArraysFromAPI()[indexPath.row]
         if isFiltering {
             cell.theme = filteredArray[indexPath.row]
         } else {
-            cell.theme = themeArray[indexPath.row]
+            cell.theme = theme
+            cell.setupButton()
         }
-        
+        cell.delegate = self
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        cell.mainImageView.contentMode = .scaleAspectFill
         return cell
     }
     
@@ -111,7 +118,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = ThemeDetailViewContoller()
-        detailVC.theme = themeArray[indexPath.row]
+        let theme = themeDataManager.getThemeArraysFromAPI()[indexPath.row]
+        detailVC.theme = theme
         detailVC.hidesBottomBarWhenPushed = true
         detailVC.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(detailVC, animated: true)
@@ -124,9 +132,29 @@ extension SearchViewController: UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String) {
-        filteredArray = themeArray.filter { (theme: Theme) -> Bool in
+        filteredArray = themeDataManager.getThemeArraysFromAPI().filter { (theme: Theme) -> Bool in
             return theme.name.lowercased().contains(searchText.lowercased())
         }
         tableView.reloadData()
+    }
+}
+
+extension SearchViewController: SearchViewTableViewCellDelegate {
+    func likeButtonTapped(cell: SearchViewTableViewCell, isLiked: Bool) {
+        if isLiked == false {
+            guard let theme = cell.theme else { return }
+            themeDataManager.saveLikedTheme(with: theme) {
+                theme.isLiked = true
+                cell.setupButton()
+                print("Add Liked Theme:", theme.name)
+            }
+        } else {
+            guard let theme = cell.theme else { return }
+            themeDataManager.cancelLikedTheme(with: theme) {
+                theme.isLiked = false
+                cell.setupButton()
+                print("Canceld Like Theme:", theme.name)
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ final class RecordViewController: UIViewController {
     
     // MARK: - Properties
     
-    let recordDataManager = CoreDataManager.shared
+    let cordDataManager = CoreDataManager.shared
     let themeDataManager = ThemeDataManager.shared
     let recordView = RecordView()
     
@@ -68,14 +68,14 @@ final class RecordViewController: UIViewController {
 
 extension RecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = recordDataManager.getRecordThemesFromCoreData().count
+        let count = cordDataManager.getRecordThemesFromCoreData().count
         print("DEBUG: EscapeHistoryTableView - \(#function), DataCounter \(count)개")
-        return recordDataManager.getRecordThemesFromCoreData().count
+        return cordDataManager.getRecordThemesFromCoreData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EscapeHistoryTableViewCell.identifier, for: indexPath) as? EscapeHistoryTableViewCell else { return UITableViewCell() }
-        let recordData = recordDataManager.getRecordThemesFromCoreData()
+        let recordData = cordDataManager.getRecordThemesFromCoreData()
         cell.recordData = recordData[indexPath.row]
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
@@ -84,6 +84,20 @@ extension RecordViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "최근 탈출 기록"
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = .boldSystemFont(ofSize: 20)
+        header.textLabel?.textColor = Setup.Color.textColor
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
 }
 
 extension RecordViewController: UITableViewDelegate {
@@ -91,7 +105,7 @@ extension RecordViewController: UITableViewDelegate {
         let detailVC = RecordDetailViewController()
         detailVC.hidesBottomBarWhenPushed = true
         detailVC.navigationItem.largeTitleDisplayMode = .never
-        detailVC.recordData = recordDataManager.getRecordThemesFromCoreData()[indexPath.row]
+        detailVC.recordData = cordDataManager.getRecordThemesFromCoreData()[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

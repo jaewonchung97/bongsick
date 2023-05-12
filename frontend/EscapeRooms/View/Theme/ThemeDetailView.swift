@@ -21,20 +21,33 @@ final class ThemeDetailView: UIView {
         }
     }
     
+    var theme: Theme? {
+        didSet {
+            setupThemeData()
+        }
+    }
+    
+    var likedTheme: LikedData? {
+        didSet {
+            setupLikedThemeData()
+        }
+    }
+    
+    var reservationURL: String?
+    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .customBlack
+        scrollView.backgroundColor = Setup.Color.backgroundColor
         // 스크롤 인디케이터(스크롤바 색) 스타일 변경
         scrollView.indicatorStyle = .black
-//        scrollView.sizeToFit()
         return scrollView
     }()
 
     let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .customBlack
+        view.backgroundColor = Setup.Color.backgroundColor
         return view
     }()
 
@@ -69,7 +82,7 @@ final class ThemeDetailView: UIView {
        let label = UILabel()
        label.translatesAutoresizingMaskIntoConstraints = false
        label.font = UIFont.boldSystemFont(ofSize: 24)
-       label.textColor = .white
+       label.textColor = Setup.Color.textColor
        return label
    }()
    
@@ -85,7 +98,7 @@ final class ThemeDetailView: UIView {
        let label = UILabel()
        label.translatesAutoresizingMaskIntoConstraints = false
        label.font = UIFont.systemFont(ofSize: 14)
-       label.textColor = .white
+       label.textColor = Setup.Color.textColor
        return label
    }()
    
@@ -93,7 +106,7 @@ final class ThemeDetailView: UIView {
        let label = UILabel()
        label.translatesAutoresizingMaskIntoConstraints = false
        label.font = UIFont.systemFont(ofSize: 14)
-       label.textColor = .white
+       label.textColor = Setup.Color.textColor
        return label
    }()
    
@@ -101,7 +114,7 @@ final class ThemeDetailView: UIView {
        let label = UILabel()
        label.translatesAutoresizingMaskIntoConstraints = false
        label.font = UIFont.systemFont(ofSize: 14)
-       label.textColor = .white
+       label.textColor = Setup.Color.textColor
        return label
    }()
     
@@ -120,7 +133,7 @@ final class ThemeDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.text = "테마 소개"
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         return label
     }()
     
@@ -128,10 +141,11 @@ final class ThemeDetailView: UIView {
        let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.font = UIFont.systemFont(ofSize: 16)
-        tv.backgroundColor = .customBlack
-        tv.textColor = .white
+        tv.backgroundColor = Setup.Color.backgroundColor
+        tv.textColor = Setup.Color.textColor
         tv.sizeToFit()
         tv.isScrollEnabled = false
+        tv.isEditable = false
         return tv
     }()
     
@@ -140,7 +154,7 @@ final class ThemeDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.text = "가격"
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         return label
     }()
     
@@ -149,7 +163,7 @@ final class ThemeDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16)
         label.text = "1인 기준"
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         return label
     }()
     
@@ -157,7 +171,7 @@ final class ThemeDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         return label
     }()
     
@@ -166,7 +180,7 @@ final class ThemeDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.text = "위치 정보"
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         return label
     }()
     
@@ -183,16 +197,14 @@ final class ThemeDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.text = "서울특별시 강남구 역삼동 824-25 대우디오빌플러스 지하 1층 111호"
-        label.textColor = .white
+        label.textColor = Setup.Color.textColor
         return label
     }()
     
     let bottomView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .customBlack
-//        view.layer.borderWidth = 0.5
-//        view.layer.borderColor = UIColor.customGray.cgColor
+        view.backgroundColor = Setup.Color.backgroundColor
         return view
     }()
     
@@ -205,6 +217,7 @@ final class ThemeDetailView: UIView {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         button.layer.cornerRadius = 8
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(reservationButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -313,7 +326,7 @@ final class ThemeDetailView: UIView {
             storyTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             storyTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
-            priceTitleLabel.topAnchor.constraint(equalTo: storyTextView.bottomAnchor, constant: 30),
+            priceTitleLabel.topAnchor.constraint(equalTo: storyTextView.bottomAnchor, constant: 0),
             priceTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             
             priceSubLabel.topAnchor.constraint(equalTo: priceTitleLabel.bottomAnchor, constant: 5),
@@ -345,12 +358,36 @@ final class ThemeDetailView: UIView {
         ])
     }
     
-    func loadImage() {
-        
+    func setupThemeData() {
+        imageURL = theme?.imgURL
+        nameLabel.text = theme?.name
+        companyLabel.text = theme?.companies[0]
+        guard let playTime = theme?.playTime, let difficulty = theme?.difficulty else { return }
+        difficultyLabel.text = String(difficulty)
+        playTimeLabel.text = String(playTime)
+        guard let personnel = theme?.personnelMin else { return }
+        personnelLabel.text = String(personnel)
+        storyTextView.text = theme?.story
+        priceLabel.text = "25000원"
+        reservationURL = theme?.reservationURL
+    }
+    
+    func setupLikedThemeData() {
+        imageURL = likedTheme?.imageURL
+        nameLabel.text = likedTheme?.name
+        companyLabel.text = likedTheme?.company
     }
     
     // MARK: - Action
-
+    
+    @objc func reservationButtonTapped() {
+        print("예약하기 버튼을 누름.")
+        guard let urlString = reservationURL else { return }
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
+        }
+        print("예약하기 버튼을 누름.")
+    }
     
     @objc func likeButtonTapped() {
         if likeButton.tag == 0 {

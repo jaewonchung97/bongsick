@@ -109,17 +109,17 @@ extension RecordDetailViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return themeDataManager.makeThemeData().count
+        return themeDataManager.getThemeArraysFromAPI().count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let themeData = themeDataManager.getThemeData()
-        return themeData[row].name
+        let theme = themeDataManager.getThemeArraysFromAPI()[row]
+        return theme.name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let themeData = themeDataManager.getThemeData()
-        let selectedData = themeData[row].name
+        let theme = themeDataManager.getThemeArraysFromAPI()[row]
+        let selectedData = theme.name
             detailView.themeTextField.text = selectedData
             print("DEBUG: Selected: \(selectedData)")
     }
