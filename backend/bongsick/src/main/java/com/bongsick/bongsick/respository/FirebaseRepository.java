@@ -124,11 +124,14 @@ public class FirebaseRepository implements com.bongsick.bongsick.respository.Rep
     }
 
     @Override
-    public String saveCompany(CompanySave company) {
+    public String saveCompany(Company company) {
         // TODO - Add Exception When it already existed
-        ApiFuture<DocumentReference> add = db.collection(COMPANIES_COLLECTION).add(company);
+        ApiFuture<WriteResult> add = db.collection(COMPANIES_COLLECTION)
+                .document(company.getId()).set(new CompanySave(company));
+
         try {
-            return add.get().getId();
+            String s = add.get().toString();
+            return "["+company.getId()+"]"+company.getName()+" has Saved";
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
@@ -144,7 +147,7 @@ public class FirebaseRepository implements com.bongsick.bongsick.respository.Rep
     }
 
     @Override
-    public List<String> getAllCompanies() {
+    public List<String> getAllCompaniesName() {
         Iterable<DocumentReference> docRefs = db.collection(THEMES_COLLECTION).listDocuments();
 
         Set<String> companies = new HashSet<>();

@@ -2,7 +2,6 @@ package com.bongsick.bongsick.service;
 
 import com.bongsick.bongsick.domain.Company;
 import com.bongsick.bongsick.domain.Theme;
-import com.bongsick.bongsick.respository.FirebaseRepository;
 import com.bongsick.bongsick.respository.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +21,12 @@ public class ThemeService {
         return repository.getThemes();
     }
 
-    public List<Company> getCompanies(){
+    public List<Company> getCompanies() {
         return repository.getCompanies();
+    }
+
+    public List<String> getAllCompaniesName(){
+        return repository.getAllCompaniesName();
     }
 
     public Company getCompany(String companyId) {

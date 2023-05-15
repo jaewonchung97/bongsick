@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +106,7 @@ public class XPhobiaParser {
             stringBuilder.append('\n');
         }
 
-        if(stringBuilder.isEmpty()){
+        if (stringBuilder.isEmpty()) {
             System.out.println("stories = " + stories);
             System.out.println("questInfo = " + questInfo);
         }
@@ -118,11 +118,15 @@ public class XPhobiaParser {
 
         String imgUrl = questInfo.select("div.thumbs > img").attr("src");
 
-        String encode = URLEncoder.encode(imgUrl, StandardCharsets.UTF_8);
-        encode = encode.replaceAll("%3A", ":");
-        encode = encode.replaceAll("%2F", "/");
+        String encodedUrl = URLEncoder.encode(imgUrl);
 
-        return encode;
+        // + to blank
+        encodedUrl = encodedUrl.replaceAll("\\+", "%20");
+
+        // ":, /" decoded
+        encodedUrl = encodedUrl.replaceAll("%3A", ":").replaceAll("%2F", "/");
+
+        return encodedUrl;
     }
 
     private static int getDifficulty(Elements questInfo) {
@@ -134,7 +138,7 @@ public class XPhobiaParser {
         return questInfo.select("div.tit_block > h5").text();
     }
 
-    private static String getReservationUrl(Elements questInfo){
+    private static String getReservationUrl(Elements questInfo) {
         return questInfo.select("div.txt_inner > a.link_more").attr("href");
     }
 
@@ -146,5 +150,4 @@ public class XPhobiaParser {
 
         return themes;
     }
-
 }

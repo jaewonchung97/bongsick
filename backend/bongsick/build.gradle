@@ -29,6 +29,8 @@ dependencies {
 
     // Jsoup HTML Parser
     implementation 'org.jsoup:jsoup:1.16.1'
+    // JSON parser
+    implementation 'org.json:json:20230227'
 }
 
 tasks.named('test') {

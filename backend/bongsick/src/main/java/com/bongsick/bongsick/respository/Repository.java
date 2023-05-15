@@ -1,7 +1,6 @@
 package com.bongsick.bongsick.respository;
 
 import com.bongsick.bongsick.domain.Company;
-import com.bongsick.bongsick.domain.CompanySave;
 import com.bongsick.bongsick.domain.Theme;
 import com.bongsick.bongsick.domain.ThemeSave;
 
@@ -20,11 +19,11 @@ public interface Repository {
 
     String saveTheme(ThemeSave theme);
 
-    String saveCompany(CompanySave company);
+    String saveCompany(Company company);
 
     void deleteThemes();
 
-    List<String> getAllCompanies();
+    List<String> getAllCompaniesName();
 
     void changeAllCompanyName(String companyName, String newCompanyName);
 }

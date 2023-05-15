@@ -11,4 +11,5 @@ public class Company {
     String name;
     GeoPoint location;
     String address;
+    String phone;
 }
